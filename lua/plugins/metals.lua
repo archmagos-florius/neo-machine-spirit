@@ -1,28 +1,29 @@
 return {
   {
     "scalameta/nvim-metals",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "mfussenegger/nvim-dap",
+    },
     ft = { "scala", "sbt", "java" },
     config = function()
-      local metals_config = require("metals").bare_config()
+      local metals = require("metals")
+      local metals_config = metals.bare_config()
 
+      -- Enable DAP integration (this is the missing middle layer)
       metals_config.on_attach = function(client, bufnr)
-        local opts = { buffer = bufnr, silent = true }
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        metals.setup_dap()
       end
 
-      -- Optional: better completion support if you already use nvim-cmp
-      -- metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      local augroup = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+      -- Auto-start Metals for Scala/SBT buffers
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "scala", "sbt", "java" },
         callback = function()
-          require("metals").initialize_or_attach(metals_config)
+          metals.initialize_or_attach(metals_config)
         end,
-        group = augroup,
+        group = vim.api.nvim_create_augroup("Metals", { clear = true }),
       })
     end,
   },
 }
+

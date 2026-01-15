@@ -5,7 +5,10 @@ vim.g.mapleader 	= " "
 vim.g.maplocalleader 	= " "
 
 
+local opts = { buffer = bufnr, silent = true }
 vim.keymap.set('n', '<leader>cd', vim.cmd.Ex)
+vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 
 vim.keymap.set("n", "<leader>e", function()
   vim.diagnostic.open_float(nil, { focus = false })
