@@ -10,12 +10,19 @@ return {
       local metals = require("metals")
       local metals_config = metals.bare_config()
 
-      -- Enable DAP integration (this is the missing middle layer)
+      -- CRITICAL: enable completion capabilities for Metals
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+      if ok_cmp then
+        capabilities = cmp_lsp.default_capabilities(capabilities)
+      end
+      metals_config.capabilities = capabilities
+
+      -- Optional: keep your DAP integration
       metals_config.on_attach = function(client, bufnr)
         metals.setup_dap()
       end
 
-      -- Auto-start Metals for Scala/SBT buffers
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "scala", "sbt", "java" },
         callback = function()
@@ -26,4 +33,3 @@ return {
     end,
   },
 }
-

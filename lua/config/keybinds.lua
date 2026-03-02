@@ -1,16 +1,18 @@
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader 	= " "
-vim.g.maplocalleader 	= " "
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
+vim.keymap.set("n", "<leader>cd", vim.cmd.Ex, { silent = true })
 
-local opts = { buffer = bufnr, silent = true }
-vim.keymap.set('n', '<leader>cd', vim.cmd.Ex)
-vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+-- LSP (works when an LSP is attached; these won’t error if no LSP)
+vim.keymap.set("n", "<leader>hov", function() vim.lsp.buf.hover() end, { silent = true })
+vim.keymap.set("n", "<leader>def", function() vim.lsp.buf.definition() end, { silent = true })
+vim.keymap.set("n", "<leader>dec", function() vim.lsp.buf.declaration() end, { silent = true })
+vim.keymap.set("n", "<leader>imp", function() vim.lsp.buf.implementation() end, { silent = true })
+vim.keymap.set("n", "<leader>ref", function() vim.lsp.buf.references() end, { silent = true })
+vim.keymap.set("n", "<leader>ren", function() vim.lsp.buf.rename() end, { silent = true })
+vim.keymap.set("n", "<leader>act", function() vim.lsp.buf.code_action() end, { silent = true })
 
-vim.keymap.set("n", "<leader>e", function()
+vim.keymap.set("n", "<leader>dia", function()
   vim.diagnostic.open_float(nil, { focus = false })
 end, { noremap = true, silent = true, desc = "Explain diagnostic" })
 
