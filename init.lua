@@ -1,5 +1,3 @@
-print("Initiating neovim engine brother...")
 require('config.options')
 require('config.keybinds')
 require('config.lazy')
-print("Arch Magos mainframe online...")

@@ -73,7 +73,10 @@ return {
     "neovim/nvim-lspconfig",
     enabled = false,
   },
-
+  {
+    "SmiteshP/nvim-navic",
+    lazy = false,
+  },
   -- ✅ Core LSP wiring (runs at startup; no "anchor plugin" needed)
   {
     "nvim-lua/plenary.nvim",
@@ -102,6 +105,11 @@ return {
         callback = function(args)
           local buf = args.buf
           local opts = { buffer = buf, silent = true, noremap = true }
+	  local clients = vim.lsp.get_clients({ bufnr = buf })
+	  local client = clients[1]
+	  local has_symbols =
+	  (client.server_capabilities and client.server_capabilities.documentSymbolProvider)
+	  or (client.capabilities and client.capabilities.documentSymbolProvider)
 
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -109,6 +117,10 @@ return {
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	  
+	  if has_symbols then
+	    require("nvim-navic").attach(client, buf)
+	  end
         end,
       })
 
@@ -142,4 +154,3 @@ return {
     end,
   },
 }
-

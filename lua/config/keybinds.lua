@@ -26,3 +26,4 @@ vim.keymap.set("n", "[d", function()
   vim.diagnostic.open_float(nil, { focus = false })
 end, { noremap = true, silent = true, desc = "Prev diagnostic" })
 
+vim.keymap.set('t','<leader><Esc>',[[<C-\><C-n>]])
