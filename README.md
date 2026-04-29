@@ -21,11 +21,15 @@ Install these before expecting the config to work fully.
 
 - [`lua/config/lazy.lua`](./lua/config/lazy.lua): bootstraps `lazy.nvim` and loads plugin specs
 - [`lua/plugins/opencode.lua`](./lua/plugins/opencode.lua): `opencode.nvim` plugin configuration
+- [`lua/plugins/snacks.lua`](./lua/plugins/snacks.lua): `snacks.nvim` configuration for OpenCode enhancements
 - [`docs/opencode.md`](./docs/opencode.md): OpenCode usage, mappings, and verification notes
+- [`docs/snacks.md`](./docs/snacks.md): Snacks integration details and verification notes
 
 ## OpenCode
 
 This config depends on [`opencode.nvim`](https://github.com/nickjvandyke/opencode.nvim) for Neovim integration with [OpenCode](https://opencode.ai/docs).
+
+It also uses [`snacks.nvim`](https://github.com/folke/snacks.nvim) to enhance OpenCode input and picker flows.
 
 See [`docs/opencode.md`](./docs/opencode.md) for:
 
@@ -33,3 +37,9 @@ See [`docs/opencode.md`](./docs/opencode.md) for:
 - key mappings
 - config locations
 - post-install verification steps
+
+See [`docs/snacks.md`](./docs/snacks.md) for:
+
+- Snacks prerequisites
+- enabled modules in this config
+- OpenCode-specific Snacks integration details
