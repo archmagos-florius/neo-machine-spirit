@@ -20,10 +20,25 @@ Install these before expecting the config to work fully.
 ## Important Files
 
 - [`lua/config/lazy.lua`](./lua/config/lazy.lua): bootstraps `lazy.nvim` and loads plugin specs
+- [`lua/plugins/dap.lua`](./lua/plugins/dap.lua): DAP setup, including PHP and Xdebug debugging
+- [`lua/plugins/lsp.lua`](./lua/plugins/lsp.lua): LSP setup, including PHP via Intelephense
 - [`lua/plugins/opencode.lua`](./lua/plugins/opencode.lua): `opencode.nvim` plugin configuration
 - [`lua/plugins/snacks.lua`](./lua/plugins/snacks.lua): `snacks.nvim` configuration for OpenCode enhancements
+- [`docs/xdebug.md`](./docs/xdebug.md): PHP/Xdebug debugging setup, mappings, and prerequisites
 - [`docs/opencode.md`](./docs/opencode.md): OpenCode usage, mappings, and verification notes
 - [`docs/snacks.md`](./docs/snacks.md): Snacks integration details and verification notes
+
+## PHP Debugging
+
+This config includes PHP debugging through Xdebug and `nvim-dap`.
+
+See [`docs/xdebug.md`](./docs/xdebug.md) for:
+
+- system prerequisites
+- configured PHP debug profiles
+- key mappings
+- adapter path expectations
+- notes about the current local PHP/Xdebug state
 
 ## OpenCode
 
