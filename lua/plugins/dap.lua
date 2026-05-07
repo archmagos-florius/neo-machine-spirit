@@ -51,6 +51,43 @@ return {
         },
       }
 
+      dap.configurations.scala = {
+        {
+          type = "scala",
+          request = "launch",
+          name = "Run or Test File",
+          metals = {
+            runType = "runOrTestFile",
+          },
+        },
+        {
+          type = "scala",
+          request = "launch",
+          name = "Test Target",
+          metals = {
+            runType = "testTarget",
+          },
+        },
+        {
+          type = "scala",
+          request = "launch",
+          name = "Run Target",
+          metals = {
+            runType = "run",
+          },
+        },
+        {
+          type = "scala",
+          request = "attach",
+          name = "Attach to service-billing :8000",
+          hostName = "localhost",
+          port = 8000,
+          buildTarget = "billing-service",
+        },
+      }
+
+      dap.configurations.java = dap.configurations.scala
+
       dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
       dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
       dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end

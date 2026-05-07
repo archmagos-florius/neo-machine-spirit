@@ -22,11 +22,24 @@ Install these before expecting the config to work fully.
 - [`lua/config/lazy.lua`](./lua/config/lazy.lua): bootstraps `lazy.nvim` and loads plugin specs
 - [`lua/plugins/dap.lua`](./lua/plugins/dap.lua): DAP setup, including PHP and Xdebug debugging
 - [`lua/plugins/lsp.lua`](./lua/plugins/lsp.lua): LSP setup, including PHP via Intelephense
+- [`lua/plugins/metals.lua`](./lua/plugins/metals.lua): Metals integration for Scala LSP and debugging
+- [`docs/scala-debugging.md`](./docs/scala-debugging.md): Scala and Metals debugging setup
 - [`lua/plugins/opencode.lua`](./lua/plugins/opencode.lua): `opencode.nvim` plugin configuration
 - [`lua/plugins/snacks.lua`](./lua/plugins/snacks.lua): `snacks.nvim` configuration for OpenCode enhancements
 - [`docs/xdebug.md`](./docs/xdebug.md): PHP/Xdebug debugging setup, mappings, and prerequisites
 - [`docs/opencode.md`](./docs/opencode.md): OpenCode usage, mappings, and verification notes
 - [`docs/snacks.md`](./docs/snacks.md): Snacks integration details and verification notes
+
+## Scala Debugging
+
+This config includes Scala debugging through Metals and `nvim-dap`.
+
+See [`docs/scala-debugging.md`](./docs/scala-debugging.md) for:
+
+- required system tools
+- Metals-specific mappings
+- configured Scala DAP profiles
+- `service-billing-7967` attach/debug notes
 
 ## PHP Debugging
 

@@ -18,9 +18,35 @@ return {
       end
       metals_config.capabilities = capabilities
 
-      -- Optional: keep your DAP integration
+      local metals_group = vim.api.nvim_create_augroup("Metals", { clear = true })
+
       metals_config.on_attach = function(client, bufnr)
         metals.setup_dap()
+
+        local opts = { buffer = bufnr, silent = true, noremap = true }
+        vim.keymap.set("n", "<leader>mr", vim.lsp.codelens.run, vim.tbl_extend("force", opts, { desc = "Metals Run CodeLens" }))
+        vim.keymap.set(
+          "n",
+          "<leader>ms",
+          metals.select_test_suite,
+          vim.tbl_extend("force", opts, { desc = "Metals Select Test Suite" })
+        )
+        vim.keymap.set(
+          "n",
+          "<leader>mt",
+          metals.select_test_case,
+          vim.tbl_extend("force", opts, { desc = "Metals Select Test Case" })
+        )
+
+        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+          buffer = bufnr,
+          group = metals_group,
+          callback = function()
+            pcall(vim.lsp.codelens.refresh)
+          end,
+        })
+
+        pcall(vim.lsp.codelens.refresh)
       end
 
       vim.api.nvim_create_autocmd("FileType", {
@@ -28,7 +54,7 @@ return {
         callback = function()
           metals.initialize_or_attach(metals_config)
         end,
-        group = vim.api.nvim_create_augroup("Metals", { clear = true }),
+        group = metals_group,
       })
     end,
   },
