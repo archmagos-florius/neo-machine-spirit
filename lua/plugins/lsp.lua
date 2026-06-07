@@ -9,6 +9,7 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {
+        "clangd",
         "gopls",
         "intelephense",
       },
@@ -151,6 +152,21 @@ return {
         capabilities = capabilities,
       })
       vim.lsp.enable("intelephense")
+
+      -- C / C-family (clangd)
+      vim.lsp.config("clangd", {
+        cmd = { mason_bin("clangd") },
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+        root_markers = {
+          "compile_commands.json",
+          "compile_flags.txt",
+          "CMakeLists.txt",
+          ".git",
+        },
+        single_file_support = true,
+        capabilities = capabilities,
+      })
+      vim.lsp.enable("clangd")
     end,
   },
 }
